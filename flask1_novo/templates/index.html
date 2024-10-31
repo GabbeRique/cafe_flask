@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BD Café</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+
+        .container {
+            background-color: #d1c0a5;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            border: 1px solid #f5f5e6;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 20px;
+            
+        }
+
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555555;
+            box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Crud Café</h1>
+        <form method="POST" action="/">
+            <input type="text" name="title" placeholder="Nome do Café" required>
+            <input type="submit" value="Add">
+        </form>
+
+        <h1>Café:</h1>
+        <table>
+            {% for book in books %}
+            <td>{{ book.title }}</td>
+            <tr>
+
+                <td>
+                    <form method="POST" action="/update" style="display: inline;">
+                        <input type="hidden" value="{{ book.title }}" name="oldtitle">
+                        <input type="text" value="{{ book.title }}" name="newtitle">
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="/delete" style="display: inline;">
+                        <input type="hidden" value="{{ book.title }}" name="title">
+                        <input type="text" placeholder="Confirme o título" name="confirm_title">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>
